@@ -1,1 +1,0 @@
-export const Section = Object.freeze({"Home":1, "Resume":2, "Design":3, "Research":4, "Collectives":5, "Contact":6})
