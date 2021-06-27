@@ -13,6 +13,9 @@ const useStyles = makeStyles({
         height: '100%',
         width: '100%'
     },
+    img2: {
+        width: '100%'
+    },
     text1: {
         fontFamily: 'Source Sans Pro',
         fontSize: '22px',
@@ -75,16 +78,20 @@ export default function Lauf() {
                 {t("lauf_p_7")}
             </Grid>
             <Grid item container spacing={horizontalSpacing}>
-                <Grid item xs={7}>
-                    <img src={'images/lauf_3.jpg'} className={classes.img}/>
+                <Grid item container direction="column" justify="center" xs={7}>
+                    <Grid item>
+                        <img src={'images/lauf_3.jpg'} className={classes.img2}/>
+                    </Grid>
                 </Grid>
                 <Grid item className={classes.text2} xs={5}>
                     {t("lauf_p_8")}
                 </Grid>
             </Grid>
             <Grid item container spacing={horizontalSpacing}>
-                <Grid item xs={7}>
-                    <img src={'images/lauf_4.jpg'} className={classes.img}/>
+                <Grid item container direction="column" justify="center" xs={7}>
+                    <Grid item>
+                        <img src={'images/lauf_4.jpg'} className={classes.img2}/>
+                    </Grid>
                 </Grid>
                 <Grid item container direction="column" xs={5}>
                     <Grid item className={classes.text2}>
@@ -97,7 +104,7 @@ export default function Lauf() {
             </Grid>
             <Grid item container spacing={horizontalSpacing}>
                 <Grid item xs={7}>
-                    <img src={'images/lauf_5.jpg'} className={classes.img}/>
+                    <img src={'images/lauf_5.jpg'} className={classes.img2}/>
                 </Grid>
                 <Grid item className={classes.text2} xs={5}>
                     {t("lauf_p_11")}
