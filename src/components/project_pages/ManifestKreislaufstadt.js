@@ -1,5 +1,6 @@
 import {Grid, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
+import { Image } from 'react-image-and-background-image-fade'
 
 const useStyles = makeStyles({
     root: {
@@ -46,10 +47,10 @@ export default function ManifestKreislaufstadt() {
                 </Grid>
             </Grid>
             <Grid item>
-                <img src={'images/manifest_kreislaufstadt_1.jpg'} className={classes.img}/>
+                <Image src='images/manifest_kreislaufstadt_1.jpg' width='100%' height='100%' transitionTime='1s'/>
             </Grid>
             <Grid item>
-                <img src={'images/manifest_kreislaufstadt_2.jpg'} className={classes.img}/>
+                <Image src='images/manifest_kreislaufstadt_2.jpg' width='100%' height='100%' transitionTime='1s'/>
             </Grid>
         </Grid>
     )
