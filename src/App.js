@@ -57,6 +57,8 @@ function App() {
     const [activeSection, setActiveSection] = useState(Section.Home);
     const [sectionClicked, sectionClick] = useState(false);
 
+    document.body.style.overflowY = 'scroll'
+
 
     const designLinks = ['/lauf_design',
                         '/heimatsuche_in_kleinasien_design',

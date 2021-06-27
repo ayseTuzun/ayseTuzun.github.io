@@ -1,5 +1,6 @@
 import {Grid, Link, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
+import {useEffect} from "react";
 
 const useStyles = makeStyles({
     root: {
@@ -60,6 +61,13 @@ const useStyles = makeStyles({
 export default function Summary() {
     const classes = useStyles();
     const { t } = useTranslation();
+
+    useEffect(() => {
+        document.body.style.overflowY = 'auto'
+        return () => {
+            document.body.style.overflowY = 'scroll'
+        }
+    }, [])
 
     return(
         <Grid container item direction="column" justify="flex-end" alignItems="stretch" className={classes.root}>

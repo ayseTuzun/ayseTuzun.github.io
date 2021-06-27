@@ -1,7 +1,5 @@
 import {Grid, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
-import {useEffect} from "react";
-import {Events} from "react-scroll";
 
 const useStyles = makeStyles({
     root: {
@@ -38,13 +36,6 @@ export default function BiennaleCanakkale() {
     const { t } = useTranslation();
     const verticalSpacing = 3;
     const horizontalSpacing = 4;
-
-    useEffect(() => {
-        document.body.style.overflowY = 'scroll'
-        return () => {
-            document.body.style.overflowY = 'auto'
-        }
-    }, [])
 
     return (
         <Grid container item direction="column" className={classes.root} spacing={verticalSpacing}>
