@@ -1,4 +1,4 @@
-import {Grid, makeStyles} from "@material-ui/core";
+import {Grid, Link, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
@@ -56,12 +56,12 @@ export default function RuralDispositionPolicies() {
             </Grid>
             <Grid item className={classes.text1}>
                 <span>{t("rural_disposition_policies_p_5")}<br/></span>
-                <span>{t("rural_disposition_policies_p_6")}<br/></span>
-                <span>{t("rural_disposition_policies_p_7")}</span>
+                <Link href="https://www.cumhuriyet.com.tr/haber/ekoturizm-rantin-diger-adi-olmasin-1822784" target="_blank" rel="noreferrer" className={classes.text1}>{t("rural_disposition_policies_p_6")}<br/></Link>
+                <Link href="https://www.diken.com.tr/rantin-adi-bu-kez-ekoturizm/" target="_blank" rel="noreferrer" className={classes.text1}>{t("rural_disposition_policies_p_7")}</Link>
             </Grid>
             <Grid item className={classes.text1}>
                 <span>{t("rural_disposition_policies_p_8")}<br/></span>
-                <span>{t("rural_disposition_policies_p_9")}</span>
+                <Link href="http://chng.it/nCZbSFMj28" target="_blank" rel="noreferrer" className={classes.text1}>{t("rural_disposition_policies_p_9")}</Link>
             </Grid>
         </Grid>
     )

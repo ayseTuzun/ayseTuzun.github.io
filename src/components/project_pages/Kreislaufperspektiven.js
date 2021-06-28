@@ -1,4 +1,4 @@
-import {Grid, makeStyles} from "@material-ui/core";
+import {Grid, Link, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
@@ -54,7 +54,7 @@ export default function Kreislaufperspektiven() {
             </Grid>
             <Grid item className={classes.text1}>
                 <span>{t("kreislaufperspektiven_p_4")}<br/></span>
-                <span>{t("kreislaufperspektiven_p_5")}</span>
+                <Link href="https://heimatsuche2020.wordpress.com/" target="_blank" rel="noreferrer" className={classes.text1}>{t("kreislaufperspektiven_p_5")}</Link>
             </Grid>
             <Grid container item spacing={horizontalSpacing}>
                 <Grid item xs={6}>

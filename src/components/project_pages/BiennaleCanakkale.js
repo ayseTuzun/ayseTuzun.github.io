@@ -34,24 +34,20 @@ const useStyles = makeStyles({
 export default function BiennaleCanakkale() {
     const classes = useStyles();
     const { t } = useTranslation();
-    const verticalSpacing = 3;
     const horizontalSpacing = 4;
 
     return (
-        <Grid container item direction="column" className={classes.root} spacing={verticalSpacing}>
-            <Grid container item spacing={horizontalSpacing}>
-                <Grid container item direction="column" xs={7}>
-                    <Grid item className={classes.title}>
-                        {t("biennale_canakkale_title_1")}
-                    </Grid>
-                    <Grid item className={classes.title}>
-                        {t("biennale_canakkale_title_2")}
-                    </Grid>
+        <Grid container item direction="column" className={classes.root}>
+            <Grid item className={classes.title}>
+                {t("biennale_canakkale_title_1")}
+            </Grid>
+            <Grid item container spacing={horizontalSpacing}>
+                <Grid item container direction="column" xs={7} justify="flex-start">
                     <Grid item className={classes.text1}>
                         {t("biennale_canakkale_p_1")}
                     </Grid>
                 </Grid>
-                <Grid container item direction="column" xs={5} justify="space-evenly">
+                <Grid container item direction="column" xs={5}>
                     <Grid item>
                         <img src={'images/biennale_canakkale_1.jpg'} className={classes.img}/>
                     </Grid>

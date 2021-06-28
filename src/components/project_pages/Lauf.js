@@ -1,4 +1,4 @@
-import {Grid, makeStyles} from "@material-ui/core";
+import {Grid, Link, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
@@ -115,7 +115,7 @@ export default function Lauf() {
             </Grid>
             <Grid item>
                 <span className={classes.text2}>{t("lauf_p_13")}<br/></span>
-                <span className={classes.text2}>{t("lauf_p_14")}</span>
+                <Link href="https://www.instagram.com/lauftheearth/" target="_blank" rel="noreferrer" className={classes.text2}>{t("lauf_p_14")}</Link>
             </Grid>
             <Grid item>
                 <img src={'images/lauf_6.jpg'} className={classes.img}/>

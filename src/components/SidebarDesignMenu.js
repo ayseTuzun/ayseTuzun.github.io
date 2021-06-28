@@ -162,8 +162,8 @@ export default function SidebarDesignMenu(props) {
 
 
     useEffect(() => {
-        myRef.current.scrollIntoView();
-    }, [])
+        myRef.current.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }, [selectedItem])
 
     return (
         <Drawer
@@ -182,7 +182,7 @@ export default function SidebarDesignMenu(props) {
                     <GridList cols={1} spacing={0}>
                         {props.tiles.map((tile, index) => (
                             <GridListTile ref={selectedItem === tile.link ? myRef : yourRef} key={tile.img} cols={tile.cols || 1} className={index === 0 ? classes.gridListTileFirst : classes.gridListTile} style={{height: '20vh'}}>
-                                <img src={tile.img} alt={tile.title} />
+                                <img src={tile.img} alt={tile.title}/>
                                 <Link to={tile.link} replace>
                                     <GridListTileBar onClick={() => onClick(tile.link)} className={selectedItem === tile.link ? classes.rootSelected : classes.root} classes={{titlePositionBottom: classes.titlePosition, title: selectedItem === tile.link ? classes.titleStyleSelected : classes.titleStyle, titleWrap: classes.titleWrap}} title={t(tile.title)}/>
                                 </Link>

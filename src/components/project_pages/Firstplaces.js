@@ -1,4 +1,4 @@
-import {Grid, makeStyles} from "@material-ui/core";
+import {Grid, Link, makeStyles} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
@@ -90,7 +90,7 @@ export default function Firstplaces() {
                 <img src={'images/first_places_7.jpg'} className={classes.img}/>
             </Grid>
             <Grid item className={classes.text2}>
-                {t("first_places_p_6")}
+                <span>{t("first_places_p_6")}<Link href="https://www.instagram.com/circular_city/" target="_blank" rel="noreferrer" className={classes.text2}>{t("first_places_p_7")}</Link></span>
             </Grid>
         </Grid>
     )
