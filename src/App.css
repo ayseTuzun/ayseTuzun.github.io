@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+.item-enter {
+  opacity: 0;
+  visibility: hidden;
+}
+.item-enter-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+  visibility: visible;
+}
+.item-exit-active {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 500ms ease-in;
+}

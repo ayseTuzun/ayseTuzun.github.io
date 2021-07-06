@@ -56,6 +56,8 @@ function App() {
     const { t } = useTranslation();
     const [activeSection, setActiveSection] = useState(Section.Home);
     const [sectionClicked, sectionClick] = useState(false);
+    const [scrollNeeded, setScrollNeeded] = useState(true);
+    const [lastClickedProjectSection, setLastClickedProjectSection] = useState(null);
 
     document.body.style.overflowY = 'scroll'
 
@@ -89,7 +91,8 @@ function App() {
                         <Sidebar
                             setActiveSection={setActiveSection}
                             activeSection={activeSection}
-                            sectionClick={sectionClick}/>
+                            sectionClick={sectionClick}
+                            setScrollNeeded={setScrollNeeded}/>
                     </Route>
                     <Route path={"/summary"}>
                         <SummaryBar/>
@@ -128,6 +131,9 @@ function App() {
                             activeSection={activeSection}
                             sectionClick={sectionClick}
                             sectionClicked={sectionClicked}
+                            scrollNeeded={scrollNeeded}
+                            lastClickedProjectSection={lastClickedProjectSection}
+                            setLastClickedProjectSection={setLastClickedProjectSection}
                         />
                     </Route>
                     <Route path={"/summary"}>

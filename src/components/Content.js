@@ -1,16 +1,13 @@
 import {Grid, makeStyles} from "@material-ui/core";
 import {MemoizedHome} from "./Home";
 import {MemoizedResume} from "./Resume";
-import {MemoizedDesign} from "./Design";
 import {useEffect, useState} from "react";
 import {Events, scroller} from "react-scroll";
 import {Section} from "../enums/Section";
 import {useInView} from "react-intersection-observer";
-import designTiles from "../tiles/designTiles";
-import researchTiles from "../tiles/researchTiles";
-import collectivesTiles from "../tiles/collectivesTiles";
 import {MemoizedContact} from "./Contact";
 import {memo} from "react";
+import Projects from "./Projects";
 
 const useStyles = makeStyles({
     root: {
@@ -62,8 +59,9 @@ const useStyles = makeStyles({
 
 export function Content(props) {
     const classes = useStyles();
-    const {setActiveSection, activeSection, sectionClick, sectionClicked} = props;
+    const {setActiveSection, activeSection, sectionClick, sectionClicked, scrollNeeded, lastClickedProjectSection, setLastClickedProjectSection} = props;
     const [scrolling, setScrolling] = useState(false);
+
     const [homeRef, homeInView] = useInView({
         /* Optional options */
         threshold: 0,
@@ -74,17 +72,8 @@ export function Content(props) {
         threshold: 0,
     });
 
-    const [designRef, designInView] = useInView({
-        /* Optional options */
-        threshold: 0,
-    });
 
-    const [researchRef, researchInView] = useInView({
-        /* Optional options */
-        threshold: 0,
-    });
-
-    const [collectivesRef, collectivesInView] = useInView({
+    const [projectsRef, projectsInView] = useInView({
         /* Optional options */
         threshold: 0,
     });
@@ -97,11 +86,14 @@ export function Content(props) {
     useEffect(() => {
         Events.scrollEvent.register('end', function(to, element) {
             setScrolling(false)
+            if (activeSection === Section.Design || activeSection === Section.Research || activeSection === Section.Collectives) {
+                setLastClickedProjectSection(activeSection)
+            }
         });
         return () => {
             Events.scrollEvent.remove('end');
         };
-    }, [])
+    }, [activeSection])
 
     useEffect(() => {
         if (!scrolling) {
@@ -109,18 +101,14 @@ export function Content(props) {
                 setActiveSection(Section.Home);
             } else if (resumeInView) {
                 setActiveSection(Section.Resume);
-            } else if (designInView) {
-                setActiveSection(Section.Design);
-            } else if (researchInView) {
-                setActiveSection(Section.Research);
-            } else if (collectivesInView) {
-                setActiveSection(Section.Collectives);
+            } else if (projectsInView) {
+                setActiveSection(lastClickedProjectSection);
             } else if (contactInView) {
                 setActiveSection(Section.Contact);
             }
         }
         
-    }, [scrolling, designInView, setActiveSection, homeInView, resumeInView, researchInView, collectivesInView, contactInView])
+    }, [projectsInView, scrolling, setActiveSection, homeInView, resumeInView, contactInView, lastClickedProjectSection])
 
     useEffect(() => {
         if (sectionClicked) {
@@ -133,13 +121,25 @@ export function Content(props) {
                     scrollTo(classes.contentItem2, -40);
                     break;
                 case Section.Design:
-                    scrollTo(classes.contentItem3, -40);
+                    if (!scrollNeeded && lastClickedProjectSection != null) {
+                        scrollToDirectly(classes.contentItem3, -40)
+                    } else {
+                        scrollTo(classes.contentItem3, -40);
+                    }
                     break;
                 case Section.Research:
-                    scrollTo(classes.contentItem4, -40);
+                    if (!scrollNeeded && lastClickedProjectSection != null) {
+                        scrollToDirectly(classes.contentItem3, -40)
+                    } else {
+                        scrollTo(classes.contentItem3, -40);
+                    }
                     break;
                 case Section.Collectives:
-                    scrollTo(classes.contentItem5, -40);
+                    if (!scrollNeeded && lastClickedProjectSection != null) {
+                        scrollToDirectly(classes.contentItem3, -40)
+                    } else {
+                        scrollTo(classes.contentItem3, -40);
+                    }
                     break;
                 case Section.Contact:
                     scrollTo(classes.contentItem6, 0);
@@ -148,13 +148,23 @@ export function Content(props) {
                     scrollTo(classes.contentItem1);
             }   
         }
-    }, [activeSection, classes.contentItem1, classes.contentItem2, classes.contentItem3, classes.contentItem4, classes.contentItem5, classes.contentItem6, sectionClick, sectionClicked])
+    }, [activeSection, classes.contentItem1, classes.contentItem2, classes.contentItem3, classes.contentItem4, classes.contentItem5, classes.contentItem6, sectionClick, sectionClicked, scrollNeeded])
 
 
     const scrollTo = (element, offset) => {
         setScrolling(true);
         scroller.scrollTo(element, {
             duration: 800,
+            delay: 0,
+            smooth: 'easeInOutQuart',
+            offset: offset
+        })
+    }
+
+    const scrollToDirectly = (element, offset) => {
+        setScrolling(true);
+        scroller.scrollTo(element, {
+            duration: 0,
             delay: 0,
             smooth: 'easeInOutQuart',
             offset: offset
@@ -172,17 +182,11 @@ export function Content(props) {
             <Grid item ref={homeRef} className={classes.contentItem1}>
                 <MemoizedHome/>
             </Grid>
+            <Grid item ref={projectsRef} className={classes.contentItem3}>
+                <Projects lastClickedProjectSection={lastClickedProjectSection}/>
+            </Grid>
             <Grid item ref={resumeRef} className={classes.contentItem2}>
                 <MemoizedResume/>
-            </Grid>
-            <Grid item ref={designRef} className={classes.contentItem3}>
-                <MemoizedDesign tiles={designTiles}/>
-            </Grid>
-            <Grid item ref={researchRef} className={classes.contentItem4}>
-                <MemoizedDesign tiles={researchTiles}/>
-            </Grid>
-            <Grid item ref={collectivesRef} className={classes.contentItem5}>
-                <MemoizedDesign tiles={collectivesTiles}/>
             </Grid>
             <Grid item ref={contactRef} className={classes.contentItem6}>
                 <MemoizedContact/>

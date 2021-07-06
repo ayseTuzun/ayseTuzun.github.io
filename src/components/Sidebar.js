@@ -121,7 +121,7 @@ const useStyles = makeStyles({
         paddingTop: 0,
         paddingBottom: 0,
         marginLeft: 13,
-        marginTop: 'min(max(3vh, 1.1rem), 6.5rem);'
+        marginTop: 'min(max(6vh, 2.3rem), 6.5rem);'
     },
     listItemResearch: {
         width: 'fit-content',
@@ -170,8 +170,14 @@ const useStyles = makeStyles({
 export default function Sidebar(props) {
     const classes = useStyles(props);
     const { t } = useTranslation();
+    const projectSections = [Section.Research, Section.Design, Section.Collectives]
 
     const handleSectionClick = (section) => {
+        if (projectSections.includes(props.activeSection) && projectSections.includes(section)) {
+            props.setScrollNeeded(false);
+        } else {
+            props.setScrollNeeded(true);
+        }
         props.setActiveSection(section);
         props.sectionClick(true);
     }
@@ -197,9 +203,6 @@ export default function Sidebar(props) {
                         <div className={classes.homeListItemTextSecondLine}>Tüzün</div>
                     </div>} className={classes.homeListItemText} classes={{primary:classes.homeListItemTextPrimary}}/>
                 </ListItem>
-                <ListItem button key={'Lebenslauf'} onClick={() => handleSectionClick(Section.Resume)} className={classes.listItemCV} classes={{button:classes.listItemButton}}>
-                    <ListItemText primary={t("sidebar_resume")} classes={{primary:classes.resumeListItemText}}/>
-                </ListItem>
                 <ListItem button key={'Entwurf'} onClick={() => handleSectionClick(Section.Design)} className={classes.listItemDesign} classes={{button:classes.listItemButton}}>
                     <ListItemText primary={t("sidebar_design")} classes={{primary:classes.designListItemText}}/>
                 </ListItem>
@@ -208,6 +211,9 @@ export default function Sidebar(props) {
                 </ListItem>
                 <ListItem button key={'Kollektives'} onClick={() => handleSectionClick(Section.Collectives)} className={classes.listItemCollectives} classes={{button:classes.listItemButton}}>
                     <ListItemText primary={t("sidebar_collectives")} classes={{primary:classes.collectivesListItemText}}/>
+                </ListItem>
+                <ListItem button key={'Lebenslauf'} onClick={() => handleSectionClick(Section.Resume)} className={classes.listItemCV} classes={{button:classes.listItemButton}}>
+                    <ListItemText primary={t("sidebar_resume")} classes={{primary:classes.resumeListItemText}}/>
                 </ListItem>
                 <ListItem button key={'Kontakt'} onClick={() => handleSectionClick(Section.Contact)} className={classes.listItem} classes={{button:classes.listItemButton}}>
                     <ListItemText primary={t("sidebar_contact")} classes={{primary:classes.contactListItemText}}/>
